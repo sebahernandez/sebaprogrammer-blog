@@ -1,48 +1,132 @@
-# Astro Starter Kit: Basics
+# sebaprogrammer - Blog Personal con Astro y Tailwind CSS
 
-```sh
-npm create astro@latest -- --template basics
+![sebaprogrammer](/public/images/sebastian-lagos.jpeg)
+
+Un blog personal profesional desarrollado con Astro y Tailwind CSS. Esta plataforma está diseñada para compartir contenido sobre desarrollo web, tecnología y experiencias profesionales.
+
+## 📋 Características
+
+- **Diseño Moderno y Responsivo**: Interfaz de usuario elegante inspirada en Airbnb
+- **Páginas Estáticas Optimizadas**: Generadas con Astro para máximo rendimiento
+- **Estilizado con Tailwind CSS**: Diseño personalizado y componentes reutilizables
+- **Sistema de Contenido**: Posts en Markdown con soporte para metadatos
+- **Layout Profesional**: Header y Footer consistentes en toda la aplicación
+- **Sistema de Autores**: Perfiles de autores con información detallada
+- **Optimizado para SEO**: Metadatos adecuados para mejor posicionamiento
+
+## 🚀 Instalación
+
+Asegúrate de tener [Node.js](https://nodejs.org/) (versión 16 o superior) instalado.
+
+1. **Clonar el repositorio**
+
+```bash
+git clone https://github.com/sebaprogrammer/astro-blog.git
+cd astro-blog
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+2. **Instalar dependencias**
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+```bash
+npm install
+```
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+3. **Iniciar el servidor de desarrollo**
 
-## 🚀 Project Structure
+```bash
+npm run dev
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+Ahora puedes acceder al blog en `http://localhost:4321`
 
-```text
-/
-├── public/
-│   └── favicon.svg
+## 📂 Estructura del Proyecto
+
+```
+astro-blog/
+├── public/                # Archivos estáticos
+│   ├── favicon.svg
+│   └── images/            # Imágenes para el blog
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/            # Recursos
+│   ├── components/        # Componentes reutilizables
+│   │   ├── Header.astro   # Navegación principal
+│   │   └── Footer.astro   # Pie de página
+│   ├── content/           # Sistema de contenido
+│   │   ├── config.ts      # Configuración del contenido
+│   │   ├── authors/       # Información de autores
+│   │   └── posts/         # Artículos en Markdown
+│   ├── layouts/           # Plantillas
+│   │   └── Layout.astro   # Layout principal
+│   ├── pages/             # Rutas de la aplicación
+│   │   ├── index.astro    # Página principal
+│   │   ├── about.astro    # Página "Sobre mí"
+│   │   ├── blog.astro     # Listado de artículos
+│   │   ├── posts/         # Páginas dinámicas de artículos
+│   │   └── autores/       # Páginas de perfiles de autores
+│   └── styles/            # Estilos globales
+├── astro.config.mjs       # Configuración de Astro
+├── tailwind.config.mjs    # Configuración de Tailwind CSS
+├── tsconfig.json          # Configuración de TypeScript
+└── package.json           # Dependencias y scripts
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 💻 Uso
 
-## 🧞 Commands
+### Creación de Contenido
 
-All commands are run from the root of the project, from a terminal:
+#### Crear un Nuevo Post
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. Crea un nuevo archivo Markdown en `src/content/posts/`
+2. Añade el frontmatter con los metadatos necesarios:
 
-## 👀 Want to learn more?
+```markdown
+---
+title: "Título del Artículo"
+description: "Breve descripción del contenido"
+pubDate: "2025-04-18"
+author: "sebastian-lagos"
+image:
+  url: "/images/mi-imagen.jpg"
+  alt: "Descripción de la imagen"
+tags: ["desarrollo", "javascript", "react"]
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Contenido del artículo en Markdown...
+```
+
+### Configuración
+
+- **Tailwind CSS**: Personaliza el diseño en `tailwind.config.mjs`
+- **Astro**: Configura el comportamiento del sitio en `astro.config.mjs`
+
+## 🛠️ Scripts Disponibles
+
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Construye el sitio para producción
+- `npm run preview` - Vista previa de la versión de producción
+
+## 📱 Responsive Design
+
+El blog está completamente optimizado para dispositivos móviles, tablets y desktops, siguiendo un enfoque "mobile-first".
+
+## 🔄 Flujo de Trabajo de Desarrollo
+
+1. Realiza cambios en los archivos de código o contenido
+2. Visualiza los cambios en tiempo real con el servidor de desarrollo
+3. Implementa pruebas si es necesario
+4. Haz commit y push de tus cambios al repositorio
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más información.
+
+## 👤 Autor
+
+- **Sebastián Lagos** - Desarrollador Fullstack
+  - [GitHub](https://github.com/sebaprogrammer)
+  - [LinkedIn](https://linkedin.com/in/sebastianlagos)
+  - [Twitter](https://twitter.com/sebastianlagos)
+
+---
+
+Hecho con ❤️ y Astro
