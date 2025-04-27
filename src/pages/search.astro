@@ -1,0 +1,16 @@
+---
+import PagefindSearch from "astro-pagefind/components/Search";
+import Layout from "../layouts/Layout.astro";
+
+export const prerender = false;
+
+const q = Astro.url.searchParams.get("q") ?? undefined;
+---
+<Layout
+  title={`Búsqueda: ${q} - Sebaprogrammer`}
+  description={`Resultados de búsqueda para: ${q}`}
+  class="bg-gray-50"
+> 
+<PagefindSearch query={q} />
+
+</Layout>

@@ -13,6 +13,7 @@ const posts = defineCollection({
       alt: z.string(),
     }),
     tags: z.array(z.string()),
+    draft: z.boolean().default(false),
   }),
 });
 

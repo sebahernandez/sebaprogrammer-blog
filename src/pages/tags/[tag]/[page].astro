@@ -1,0 +1,319 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { Page } from '../../../types/page';
+import Card from '../../../components/Card.astro';
+import Pagination from '../../../components/pagination/pagination.astro';
+import { normalizeTag } from '../../../utils/stringUtils';
+
+// Definición del tipo para la función paginate
+type PaginateFunction = (
+  data: CollectionEntry<'posts'>[],
+  options: { 
+    pageSize: number;
+    params?: Record<string, any>;
+    props?: Record<string, any>;
+  }
+) => any[];
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+  // Pagination
+  const POSTS_PER_PAGE = 6;
+
+  // Obtener todos los posts
+  const allPosts = await getCollection('posts', ({data}) => {
+    return !data.draft;
+  });
+  
+  // Ordenar por fecha de publicación (más reciente primero)
+  const sortedPosts = allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf());
+
+  // Obtener todas las etiquetas únicas (normalizadas a minúsculas)
+  const allTags = Array.from(
+    new Set(
+      allPosts.flatMap((post) => (post.data.tags || []).map(tag => tag.toLowerCase()))
+    )
+  ).sort();
+
+  // Crear rutas para cada etiqueta y para todos los artículos
+  const routes = [
+    // Ruta para "todos" los artículos
+    ...paginate(sortedPosts, {
+      pageSize: POSTS_PER_PAGE,
+      params: { tag: 'todos', page: 1 },
+      props: { 
+        tag: 'todos',
+        normalizedTag: 'todos',
+        isAllArticles: true
+      }
+    }),
+    
+    // Rutas para cada etiqueta específica
+    ...allTags.flatMap(tag => {
+      const filteredPosts = sortedPosts.filter(post => 
+        (post.data.tags || []).some(t => t.toLowerCase() === tag)
+      );
+      
+      // Normalizar tag para URL
+      const normalizedTag = normalizeTag(tag);
+      
+      return paginate(filteredPosts, {
+        pageSize: POSTS_PER_PAGE,
+        params: { tag: normalizedTag, page: 1 },
+        props: { 
+          tag,  // Tag original para mostrar
+          normalizedTag, // Tag normalizado para URLs
+          isAllArticles: false
+        }
+      });
+    })
+  ];
+  
+  return routes;
+}
+
+// La propiedad page se proporciona automáticamente por getStaticPaths
+type Props = {
+  page: Page;
+  tag: string;
+  normalizedTag: string;
+  isAllArticles?: boolean;
+};
+
+// Destructurar la propiedad page y tag de Astro.props
+const { page, tag, normalizedTag, isAllArticles = false } = Astro.props;
+
+// Obtener todos los posts para calcular el total de etiquetas
+const allPosts = await getCollection('posts', ({data}) => {
+  return !data.draft;
+});
+
+// Obtener todas las etiquetas únicas de todos los posts
+const allTags = Array.from(
+  new Set(
+    allPosts.flatMap((post) => (post.data.tags || []).map(tag => tag.toLowerCase()))
+  )
+).sort();
+
+// Calcular el conteo de posts por etiqueta (usando tags normalizados)
+const tagCounts = allPosts.reduce((count: Record<string, number>, post) => {
+  (post.data.tags || []).forEach(tag => {
+    const normalizedTag = tag.toLowerCase();
+    count[normalizedTag] = (count[normalizedTag] || 0) + 1;
+  });
+  return count;
+}, {});
+
+// Formatear el nombre de la etiqueta para el título (primera letra mayúscula)
+const formattedTag = isAllArticles ? 'Todos los artículos' : tag.charAt(0).toUpperCase() + tag.slice(1);
+// Establecer el título y la descripción en función de si es 'todos los artículos' o una etiqueta específica
+const pageTitle = isAllArticles ? 'Blog de Sebastián Lagos' : `Artículos sobre ${formattedTag} | Blog de Sebastián Lagos`;
+const pageDescription = isAllArticles 
+  ? 'Artículos sobre inteligencia artificial, desarrollo de software y las tecnologías que están cambiando la forma en que creamos aplicaciones.'
+  : `Explora artículos sobre ${formattedTag} y aprende los últimos avances y técnicas en este tema.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="mb-16 text-center">
+      {isAllArticles ? (
+        <>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">Explorando el desarrollo con IA</h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">Artículos sobre inteligencia artificial, desarrollo de software y las tecnologías que están cambiando la forma en que creamos aplicaciones.</p>
+        </>
+      ) : (
+        <>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">Artículos sobre {formattedTag}</h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Explorando los últimos avances, técnicas y aplicaciones en el campo de {formattedTag}.
+          </p>
+        </>
+      )}
+    </div>
+    
+    <!-- Filtros por etiquetas -->
+    <div class="mb-10 relative">
+      <button id="prev-tag" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 text-purple-600 hover:text-purple-800 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div class="overflow-hidden px-8">
+        <div id="tags-carousel" class="flex space-x-2 transition-transform duration-300 ease-in-out">
+          <button 
+            class={`${
+              isAllArticles 
+                ? 'bg-purple-600 text-white' 
+                : 'bg-gray-100 text-gray-700'
+            } px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200 tag-filter cursor-pointer flex-shrink-0`}
+            data-tag="todos"
+            data-normalized-tag="todos"
+          >
+            Todos los artículos
+          </button>
+          {allTags.map(currentTag => (
+            <button 
+              class={`${
+                currentTag === tag.toLowerCase() && !isAllArticles
+                  ? 'bg-purple-600 text-white' 
+                  : 'bg-gray-100 text-gray-700'
+              } px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200 tag-filter cursor-pointer flex-shrink-0`}
+              data-tag={currentTag}
+              data-normalized-tag={normalizeTag(currentTag)}
+            >
+              {currentTag.replace(/^./, currentTag[0].toUpperCase())}
+              <span class={`ml-1 ${currentTag === tag.toLowerCase() && !isAllArticles ? 'text-white' : 'text-gray-500'}`}>({tagCounts[currentTag]})</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <button id="next-tag" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 text-purple-600 hover:text-purple-800 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Lista de artículos -->
+    <div id="articles-container">
+      <h2 id="articles-title" class="text-2xl font-bold text-gray-900 mb-6">
+        {isAllArticles 
+          ? `Artículos de blog (${page.data.length})`
+          : `Artículos sobre ${formattedTag} (${page.data.length})`
+        }
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {page.data.map((post) => (
+           <Card post={post} key={post.slug} />
+        ))}
+      </div>
+    </div>
+    
+    <!-- Paginación -->
+    <div class="mt-12">
+      <Pagination page={page} tag={normalizedTag}/>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { normalizeTag } from '../../../utils/stringUtils';
+  
+  // Script para manejar el filtrado de artículos por etiquetas
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.tag-filter');
+    const tagsCarousel = document.getElementById('tags-carousel');
+    const prevButton = document.getElementById('prev-tag');
+    const nextButton = document.getElementById('next-tag');
+    let scrollAmount = 200; // Cantidad de desplazamiento en píxeles
+    
+    // Inicializar los botones de navegación
+    if (prevButton && nextButton && tagsCarousel) {
+      // Función para verificar si se puede desplazar
+      function updateButtonVisibility() {
+        if (!tagsCarousel || !prevButton || !nextButton) return;
+
+        const isAtStart = tagsCarousel.scrollLeft <= 10;
+        const isAtEnd = tagsCarousel.scrollLeft + tagsCarousel.offsetWidth >= tagsCarousel.scrollWidth - 10;
+        
+        // Actualizar visibilidad de los botones
+        prevButton.style.opacity = isAtStart ? '0.5' : '1';
+        prevButton.style.cursor = isAtStart ? 'default' : 'pointer';
+        nextButton.style.opacity = isAtEnd ? '0.5' : '1';
+        nextButton.style.cursor = isAtEnd ? 'default' : 'pointer';
+      }
+      
+      // Funciones para desplazar el carousel
+      prevButton.addEventListener('click', () => {
+        tagsCarousel.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+        setTimeout(updateButtonVisibility, 310); // Actualizar después de la animación
+      });
+      
+      nextButton.addEventListener('click', () => {
+        tagsCarousel.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+        setTimeout(updateButtonVisibility, 310); // Actualizar después de la animación
+      });
+      
+      // Inicializar el estado de los botones
+      updateButtonVisibility();
+      
+      // Actualizar botones cuando se hace scroll manualmente
+      tagsCarousel.addEventListener('scroll', () => {
+        updateButtonVisibility();
+      });
+      
+      // Actualizar cuando cambia el tamaño de la ventana
+      window.addEventListener('resize', () => {
+        updateButtonVisibility();
+      });
+    }
+    
+    // Añadir listeners a los botones de filtro
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Obtener etiqueta seleccionada
+        const selectedTag = button.getAttribute('data-tag') || 'todos';
+        
+        // Redirigir a la URL específica de la etiqueta
+        const normalizedTag = button.getAttribute('data-normalized-tag') || normalizeTag(selectedTag);
+        window.location.href = `/tags/${normalizedTag}/1`;
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Estilos para el carousel de tags */
+  #tags-carousel {
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: scroll;
+  }
+  
+  #tags-carousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Estilos para los botones de navegación */
+  #prev-tag, #next-tag {
+    transition: opacity 0.2s ease-in-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  #prev-tag:hover, #next-tag:hover {
+    background-color: #f9fafb;
+  }
+  
+  /* Asegurar que los botones de navegación sean responsivos */
+  @media (max-width: 640px) {
+    #prev-tag, #next-tag {
+      padding: 0.35rem;
+    }
+    
+    #prev-tag svg, #next-tag svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+  
+  /* Estilos para paginación responsiva */
+  @media (max-width: 640px) {
+    nav[aria-label="Paginación"] {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    nav[aria-label="Paginación"] a {
+      margin: 0.25rem;
+    }
+  }
+</style>

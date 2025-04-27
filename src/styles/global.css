@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* Smooth scrolling behavior for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom classes for smooth scroll animation */
+.smooth-scroll {
+  transition: all 0.5s ease;
+}

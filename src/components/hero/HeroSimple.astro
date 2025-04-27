@@ -1,0 +1,42 @@
+---
+interface Props {
+  tags?: string[];
+}
+
+const { tags = [] } = Astro.props;
+
+// Importar función para normalizar tags
+import { normalizeTag } from '../../utils/stringUtils';
+---
+
+<section class="relative bg-white overflow-hidden">
+  <!-- Hero background -->
+
+  
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+    <div class="pt-20 pb-20 md:pt-28 md:pb-28">
+      <!-- Hero content -->
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight mb-6">
+          Desarrollo, IA y tecnología
+        </h1>
+        <p class="text-xl text-gray-600 mb-8">
+          Un blog sobre desarrollo de software, inteligencia artificial y las tecnologías que están transformando nuestro mundo digital.
+        </p>
+        
+        {tags.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-2">
+            {tags.map((tag) => (
+              <a
+                href={`/tags/${normalizeTag(tag)}/1`}
+                class="px-4 py-2 rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors duration-200"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

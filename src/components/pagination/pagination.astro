@@ -1,0 +1,53 @@
+---
+export interface Props {
+  page: {
+    url: {
+      prev: string | undefined;
+      next: string | undefined;
+    },
+    currentPage: number;
+    lastPage: number;
+  };
+  tag?: string; // Añadimos el parámetro de etiqueta
+}
+
+const { page, tag } = Astro.props;
+
+// Generar un array de números de página
+const pageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
+
+// Función para generar la URL de página considerando la etiqueta
+function getPageUrl(pageNum: number) {
+  if (tag) {
+    return `/tags/${tag}/${pageNum}`;
+  }
+  return `/blog/${pageNum}`;
+}
+---
+
+<nav aria-label="Paginación" class="flex justify-center items-center space-x-1 mt-8">
+  {page.url.prev && (
+    <a href={page.url.prev} class="px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 hover:bg-gray-50">
+      &larr; Anterior
+    </a>
+  )}
+  
+  {pageNumbers.map((num) => (
+    <a 
+      href={getPageUrl(num)} 
+      class={`px-4 py-2 text-sm font-medium rounded-md ${
+        num === page.currentPage 
+          ? 'bg-purple-600 text-white' 
+          : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+      }`}
+    >
+      {num}
+    </a>
+  ))}
+  
+  {page.url.next && (
+    <a href={page.url.next} class="px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 hover:bg-gray-50">
+      Siguiente &rarr;
+    </a>
+  )}
+</nav>

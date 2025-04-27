@@ -1,0 +1,71 @@
+---
+import { type CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  key?: string;
+}
+
+const { post } = Astro.props;
+
+// Format the date
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+// Ensure tags is always an array and normalize to lowercase
+const tags = (post.data.tags || []).map(tag => tag);
+---
+
+<article class="article-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300" data-tags={JSON.stringify(tags)}>
+    {post.data.image && (
+      <a href={`/posts/${post.slug}`} class="block">
+        <div class="relative h-48 overflow-hidden">
+          <img 
+            src={post.data.image.url} 
+            alt={post.data.image.alt} 
+            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+      </a>
+    )}
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-2">
+        <p class="text-xs text-gray-500">
+          {formattedDate}
+        </p>
+      </div>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-1 mb-2">
+          {post.data.tags.map(tag => (
+            <span class="bg-purple-50 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+      <a href={`/posts/${post.slug}`} class="block group">
+        <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors line-clamp-2">
+          {post.data.title}
+        </h3>
+        <p class="text-gray-600 text-sm mb-3 line-clamp-2">{post.data.description}</p>
+      </a>
+      <div class="flex justify-between items-center">
+        {post.data.author && (
+          <a href={`/autores/${post.data.author}`} class="flex items-center space-x-2 text-xs hover:underline">
+            <img 
+              src="/images/sebastian-lagos.jpeg" 
+              alt="Foto de perfil" 
+              class="h-5 w-5 rounded-full object-cover border border-gray-200"
+            />
+            <span>Sebastián Lagos</span>
+          </a>
+        )}
+        <a href={`/posts/${post.slug}`} class="text-purple-600 text-xs font-medium hover:text-purple-800 transition-colors">
+          Leer más →
+        </a>
+      </div>
+    </div>
+  </article>

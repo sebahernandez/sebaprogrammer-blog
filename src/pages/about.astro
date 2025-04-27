@@ -3,20 +3,669 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout>
-  <div class="max-w-4xl mx-auto px-4 py-8">
-    <nav class="flex gap-6 mb-8">
-      <a href="/" class="text-purple-700 hover:text-purple-900 font-medium">Inicio</a>
-      <a href="/about/" class="text-purple-700 hover:text-purple-900 font-medium">Sobre mi</a>
-      <a href="/blog/" class="text-purple-700 hover:text-purple-900 font-medium">Blog</a>
-    </nav>
+  <!-- Hero Section -->
+  <section class="pt-16 pb-12 md:pb-16 lg:pt-24 lg:pb-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Navigation breadcrumbs -->
+      <div class="mb-6">
+        <div class="flex items-center text-sm text-gray-500">
+          <a href="/" class="hover:text-purple-700 transition-colors">Inicio</a>
+          <span class="mx-2">›</span>
+          <span class="text-gray-900 font-medium">Sobre mí</span>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+        <!-- Profile image with background -->
+        <div class="order-2 md:order-1 flex justify-center">
+          <div class="relative">
+            <!-- Background decoration -->
+            <div class="absolute -top-6 -left-6 w-full h-full bg-purple-100 rounded-full transform -rotate-6"></div>
+            <div class="absolute -bottom-6 -right-6 w-full h-full bg-purple-200 rounded-full transform rotate-3"></div>
+            
+            <!-- Profile image -->
+            <div class="relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white shadow-lg">
+              <img 
+                src="/images/sebastian-lagos.jpeg" 
+                alt="Sebastián Lagos" 
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hero content -->
+        <div class="order-1 md:order-2 text-center md:text-left">
+          <div class="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-sm font-medium mb-4">Desarrollador Full Stack</div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight">Sebastián Lagos</h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl md:pr-6">
+            Desarrollador Full Stack con enfoque en tecnologías web modernas e inteligencia artificial. Creo soluciones innovadoras que transforman la experiencia digital.
+          </p>
+          
+          <!-- Social links -->
+          <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+            <a href="https://github.com/sebaprogrammer" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-gray-900 hover:bg-black text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+              </svg>
+              GitHub
+            </a>
+            <a href="https://linkedin.com/in/sebastián-lagos-40b1331a5" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://twitter.com/sebastianlagos" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-[#1DA1F2] hover:bg-blue-500 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+              </svg>
+              Twitter
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    <div class="bg-white rounded-lg shadow-md p-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-4">Sobre mi</h1>
-      <h2 class="text-xl font-semibold text-gray-800 mb-6">... ¡y mi nuevo sitio Astro!</h2>
-      <div class="space-y-4 text-gray-700 leading-relaxed">
-        <p>Estoy trabajando en el tutorial introductorio de Astro. Esta es la segunda página de mi sitio web, ¡y es la primera que he construido yo mismo!</p>
-        <p>Este sitio se irá actualizando a medida que vaya completando más partes del tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!</p>
+    <!-- Categories Navigation -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <nav class="flex overflow-x-auto pb-2 scrollbar-hide">
+        <div class="flex space-x-8 mx-auto">
+          <a href="#sobre-mi" class="flex items-center px-2 py-2 text-gray-700 hover:text-purple-700 border-b-2 border-purple-600 font-medium smooth-scroll">
+            <span>Sobre mí</span>
+          </a>
+          <a href="#experiencia" class="flex items-center px-2 py-2 text-gray-500 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-600 transition-colors smooth-scroll">
+            <span>Experiencia</span>
+          </a>
+          <a href="#educacion" class="flex items-center px-2 py-2 text-gray-500 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-600 transition-colors smooth-scroll">
+            <span>Educación</span>
+          </a>
+          <a href="#habilidades" class="flex items-center px-2 py-2 text-gray-500 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-600 transition-colors smooth-scroll">
+            <span>Habilidades</span>
+          </a>
+          <a href="#proyectos" class="flex items-center px-2 py-2 text-gray-500 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-600 transition-colors smooth-scroll">
+            <span>Proyectos</span>
+          </a>
+          <a href="#contacto" class="flex items-center px-2 py-2 text-gray-500 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-600 transition-colors smooth-scroll">
+            <span>Contacto</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </section>
+  
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-24">
+          <nav class="space-y-1 mb-8">
+            <a href="#sobre-mi" class="block py-2 px-4 rounded-lg bg-purple-50 text-purple-700 font-medium border-l-4 border-purple-600 smooth-scroll">Sobre mí</a>
+            <a href="#experiencia" class="block py-2 px-4 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-purple-700 transition-colors smooth-scroll">Experiencia</a>
+            <a href="#educacion" class="block py-2 px-4 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-purple-700 transition-colors smooth-scroll">Educación</a>
+            <a href="#habilidades" class="block py-2 px-4 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-purple-700 transition-colors smooth-scroll">Habilidades</a>
+            <a href="#proyectos" class="block py-2 px-4 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-purple-700 transition-colors smooth-scroll">Proyectos</a>
+            <a href="#contacto" class="block py-2 px-4 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-purple-700 transition-colors smooth-scroll">Contacto</a>
+          </nav>
+          
+          <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Información de contacto</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span class="text-gray-700">sebastianlagos@example.com</span>
+              </li>
+              <li class="flex items-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span class="text-gray-700">+56 9 1234 5678</span>
+              </li>
+              <li class="flex items-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="text-gray-700">Santiago, Chile</span>
+              </li>
+            </ul>
+            <div class="mt-6">
+              <a href="#contacto" class="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors smooth-scroll">
+                Contactarme
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <!-- Sobre Mí -->
+        <section id="sobre-mi" class="mb-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Sobre Mí</h2>
+          <div class="prose prose-lg max-w-none">
+            <p>
+              Soy un desarrollador Full Stack con más de 4 años de experiencia creando aplicaciones web modernas y soluciones digitales innovadoras. Me especializo en tecnologías frontend como React, Vue.js y Angular, así como en backend con Node.js, Express y bases de datos SQL/NoSQL.
+            </p>
+            <p>
+              Mi pasión es crear software que no solo funcione perfectamente sino que también ofrezca experiencias excepcionales a los usuarios. Actualmente estoy expandiendo mis conocimientos en el campo de la inteligencia artificial y el aprendizaje automático, explorando cómo estas tecnologías pueden mejorar las aplicaciones que desarrollamos.
+            </p>
+            <p>
+              Además de programar, disfruto compartiendo conocimientos a través de mi blog, donde escribo sobre las últimas tendencias en desarrollo web, IA y buenas prácticas de programación. Creo firmemente en el aprendizaje continuo y en mantenerme al día con las tecnologías emergentes.
+            </p>
+          </div>
+        </section>
+        
+        <!-- Experiencia -->
+        <section id="experiencia" class="mb-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Experiencia Profesional</h2>
+          
+          <div class="space-y-8">
+            <!-- Trabajo 1 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Desarrollador Full Stack Senior</h3>
+                  <p class="text-purple-700 font-medium">Datapro Technologies</p>
+                </div>
+                <div class="mt-2 md:mt-0 text-sm text-gray-500">
+                  Enero 2022 - Presente
+                </div>
+              </div>
+              <ul class="ml-6 space-y-2 text-gray-700 list-disc">
+                <li>Lideré el desarrollo de aplicaciones web financieras para clientes corporativos utilizando React, Node.js y MongoDB.</li>
+                <li>Implementé soluciones de IA para automatizar procesos de análisis de datos y detección de fraudes.</li>
+                <li>Gestioné un equipo de 4 desarrolladores, implementando metodologías ágiles y CI/CD.</li>
+                <li>Reduje el tiempo de carga de la aplicación principal en un 40% mediante optimización de código y cache.</li>
+              </ul>
+            </div>
+            
+            <!-- Trabajo 2 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Desarrollador Frontend</h3>
+                  <p class="text-purple-700 font-medium">InnovaTech Solutions</p>
+                </div>
+                <div class="mt-2 md:mt-0 text-sm text-gray-500">
+                  Marzo 2020 - Diciembre 2021
+                </div>
+              </div>
+              <ul class="ml-6 space-y-2 text-gray-700 list-disc">
+                <li>Desarrollé interfaces de usuario responsivas y accesibles utilizando Vue.js y Tailwind CSS.</li>
+                <li>Colaboré en la creación de una biblioteca de componentes reutilizables que redujo el tiempo de desarrollo en un 25%.</li>
+                <li>Integré APIs RESTful y GraphQL para conectar el frontend con servicios backend.</li>
+                <li>Participé activamente en revisiones de código y mentorías a desarrolladores junior.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Educación -->
+        <section id="educacion" class="mb-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Educación</h2>
+          
+          <div class="space-y-8">
+            <!-- Educación 1 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Ingeniería en Informática</h3>
+                  <p class="text-purple-700 font-medium">Universidad de Chile</p>
+                </div>
+                <div class="mt-2 md:mt-0 text-sm text-gray-500">
+                  2016 - 2020
+                </div>
+              </div>
+              <p class="text-gray-700">
+                Graduado con honores. Especialización en Desarrollo de Software y Ciencia de Datos. Proyecto de tesis enfocado en aplicaciones de aprendizaje automático para análisis predictivo en comercio electrónico.
+              </p>
+            </div>
+            
+            <!-- Certificación 1 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">AWS Certified Developer - Associate</h3>
+                  <p class="text-purple-700 font-medium">Amazon Web Services</p>
+                </div>
+                <div class="mt-2 md:mt-0 text-sm text-gray-500">
+                  2022
+                </div>
+              </div>
+            </div>
+            
+            <!-- Certificación 2 -->
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Professional Scrum Master I (PSM I)</h3>
+                  <p class="text-purple-700 font-medium">Scrum.org</p>
+                </div>
+                <div class="mt-2 md:mt-0 text-sm text-gray-500">
+                  2021
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Habilidades -->
+        <section id="habilidades" class="mb-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Habilidades</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Categoría 1 -->
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Frontend</h3>
+              <div class="space-y-3">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">React / React Native</span>
+                    <span class="text-gray-500 text-sm">95%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 95%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">Vue.js</span>
+                    <span class="text-gray-500 text-sm">90%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 90%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">HTML5/CSS3/SASS</span>
+                    <span class="text-gray-500 text-sm">95%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 95%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">Tailwind CSS</span>
+                    <span class="text-gray-500 text-sm">90%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 90%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Categoría 2 -->
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Backend</h3>
+              <div class="space-y-3">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">Node.js / Express</span>
+                    <span class="text-gray-500 text-sm">90%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 90%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">MongoDB</span>
+                    <span class="text-gray-500 text-sm">85%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 85%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">SQL (PostgreSQL/MySQL)</span>
+                    <span class="text-gray-500 text-sm">80%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 80%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">GraphQL</span>
+                    <span class="text-gray-500 text-sm">75%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 75%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Categoría 3 -->
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">DevOps & Cloud</h3>
+              <div class="space-y-3">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">AWS</span>
+                    <span class="text-gray-500 text-sm">85%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 85%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">Docker</span>
+                    <span class="text-gray-500 text-sm">80%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 80%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">CI/CD</span>
+                    <span class="text-gray-500 text-sm">85%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 85%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Categoría 4 -->
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">IA & Análisis de Datos</h3>
+              <div class="space-y-3">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">Python</span>
+                    <span class="text-gray-500 text-sm">85%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 85%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">TensorFlow / PyTorch</span>
+                    <span class="text-gray-500 text-sm">70%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 70%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-gray-700 font-medium">Pandas / NumPy</span>
+                    <span class="text-gray-500 text-sm">75%</span>
+                  </div>
+                  <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-purple-600 rounded-full" style="width: 75%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Proyectos -->
+        <section id="proyectos" class="mb-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Proyectos Destacados</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Proyecto 1 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="relative h-48">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
+                  alt="Imagen de proyecto" 
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-md">Full Stack</span>
+                </div>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Sistema de gestión financiera</h3>
+                <p class="text-gray-700 text-sm mb-4">Aplicación web para gestión financiera personal con analíticas avanzadas y predicciones de gastos utilizando IA.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">React</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Node.js</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">MongoDB</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">TensorFlow</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">Ver detalles</a>
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">Demo</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Proyecto 2 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="relative h-48">
+                <img 
+                  src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
+                  alt="Imagen de proyecto" 
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-md">Frontend</span>
+                </div>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Dashboard de analíticas</h3>
+                <p class="text-gray-700 text-sm mb-4">Interfaz administrativa para visualización de datos empresariales con filtros complejos y gráficos interactivos.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Vue.js</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">D3.js</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Tailwind CSS</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">Ver detalles</a>
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">Demo</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Proyecto 3 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="relative h-48">
+                <img 
+                  src="https://images.unsplash.com/photo-1560807707-8cc77767d783?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
+                  alt="Imagen de proyecto" 
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-md">IA</span>
+                </div>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Detector de código malicioso</h3>
+                <p class="text-gray-700 text-sm mb-4">Herramienta que utiliza técnicas de IA para analizar y detectar código potencialmente malicioso en repositorios.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Python</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">TensorFlow</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">NLP</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">Ver detalles</a>
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">GitHub</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Proyecto 4 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="relative h-48">
+                <img 
+                  src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
+                  alt="Imagen de proyecto" 
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-md">Backend</span>
+                </div>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold text-gray-900 mb-2">API de microservicios</h3>
+                <p class="text-gray-700 text-sm mb-4">Arquitectura de microservicios escalable para procesamiento de pagos con alta disponibilidad y tolerancia a fallos.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Node.js</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Docker</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Kubernetes</span>
+                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">AWS</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">Ver detalles</a>
+                  <a href="#" class="text-purple-600 text-sm font-medium hover:text-purple-800 transition-colors">GitHub</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Contacto -->
+        <section id="contacto" class="mb-16">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Contacto</h2>
+          
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 md:p-8">
+              <p class="text-gray-700 mb-6">
+                ¿Tienes un proyecto interesante o una oportunidad laboral? ¡Me encantaría conocerlo! Completa el formulario a continuación y me pondré en contacto contigo lo antes posible.
+              </p>
+              
+              <form class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      placeholder="Tu nombre"
+                    />
+                  </div>
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      placeholder="tu@email.com"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Asunto</label>
+                  <input 
+                    type="text" 
+                    id="subject" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder="Asunto de tu mensaje"
+                  />
+                </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                  <textarea 
+                    id="message" 
+                    rows="5" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder="Escribe tu mensaje aquí..."
+                  ></textarea>
+                </div>
+                <div>
+                  <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors shadow-sm">
+                    Enviar mensaje
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>
+
+  <!-- Sección CTA -->
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-purple-700 rounded-2xl shadow-xl overflow-hidden">
+        <div class="px-6 py-12 md:p-12 md:flex md:items-center md:justify-between">
+          <div class="md:max-w-2xl">
+            <h2 class="text-3xl font-bold text-white">¿Interesado en trabajar juntos?</h2>
+            <p class="mt-4 text-lg text-purple-100">
+              Estoy abierto a oportunidades de freelance, colaboraciones y roles a tiempo completo en proyectos interesantes.
+            </p>
+          </div>
+          <div class="mt-8 md:mt-0 md:ml-10 flex-shrink-0">
+            <a href="#contacto" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-white hover:bg-gray-50 shadow-md transition-colors smooth-scroll">
+              Conversemos
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Script para el scrollspy del menú lateral
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('nav a');
+      
+      // Mejorar el smooth scrolling con un offset
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (this: HTMLAnchorElement, e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = typeof targetId === 'string' ? document.querySelector(targetId) : null;
+          
+          if (targetElement) {
+            const headerOffset = 80; // Ajusta esto según el tamaño de tu header
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      function onScroll() {
+        const scrollPosition = window.scrollY + 100;
+        
+        sections.forEach(section => {
+          const sectionTop = (section as HTMLElement).offsetTop;
+          const sectionHeight = (section as HTMLElement).offsetHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('bg-purple-50', 'text-purple-700', 'border-l-4', 'border-purple-600');
+              
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('bg-purple-50', 'text-purple-700', 'border-l-4', 'border-purple-600');
+              }
+            });
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', onScroll);
+    });
+  </script>
 </Layout>
